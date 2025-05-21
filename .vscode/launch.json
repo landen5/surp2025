@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch Android Emulator",
+        "type": "node",
+        "request": "launch",
+        "preLaunchTask": "Launch Android Emulator",
+        "runtimeExecutable": "echo",
+        "runtimeArgs": ["Emulator launched in separate terminal"],
+        "presentation": {
+          "hidden": false,
+          "group": "React Native",
+          "order": 1
+        }
+      }
+    ]
+  }
