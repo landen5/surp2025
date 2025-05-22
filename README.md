@@ -3,8 +3,14 @@
 activate virtual environment:
 . .venv/bin/activate 
 
-run:
+start flask server:
+cd backend
+python3 main.py
 
-pip install flask
+start react:
+cd my-app
+npx expo start
+a
 
-flask --app main run
+connect to ec2
+ssh -i datasurpkey.pem ec2-user@ec2-13-57-205-80.us-west-1.compute.amazonaws.com

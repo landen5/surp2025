@@ -15,7 +15,7 @@ export default function Index() {
   const [isSending, setIsSending] = useState(false);
   const [responseData, setResponseData] = useState(null);
 
-  const API_URL = 'http://172.28.73.53:8000/api/data'; // replace with your ip
+  const API_URL = 'http://ec2-13-57-205-80.us-west-1.compute.amazonaws.com:8000/api/data'; // replace with your ip
 
   const sendData = async () => {
     if (!userData.trim()) {
