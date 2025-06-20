@@ -1,0 +1,98 @@
+{
+    "App name": "Walmart: Shopping & Savings",
+    "App category": [
+        "Shopping"
+    ],
+    "URL": "https://play.google.com/store/apps/details?id=com.walmart.android&hl=en_US",
+    "App ID": "com.walmart.android",
+    "Average rating": "4.7",
+    "Total reviews": "355000000",
+    "Contains ads": true,
+    "In-app purchases": false,
+    "Downloads": "50000000+",
+    "Price": "$0.00",
+    "This app may share these data types with third parties": "Personal info and Device or other IDs",
+    "This app may collect these data types": "Location, Personal info and 5 others",
+    "Data is encrypted in transit": null,
+    "Data can\u2019t be deleted": null,
+    "Data shared": {
+        "Personal info": {
+            "Email address": [
+                "Advertising or marketing"
+            ],
+            "User IDs": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ]
+        }
+    },
+    "Data collected": {
+        "Location": {
+            "Approximate location": [
+                "App functionality, Personalization"
+            ],
+            "Precise location": [
+                "App functionality, Personalization"
+            ]
+        },
+        "Personal info": {
+            "Name": [
+                "App functionality, Account management"
+            ],
+            "Email address": [
+                "App functionality, Advertising or marketing, Account management"
+            ],
+            "User IDs": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "Address": [
+                "App functionality"
+            ],
+            "Phone number": [
+                "App functionality"
+            ]
+        },
+        "Financial info": {
+            "User payment info": [
+                "App functionality, Fraud prevention, security, and compliance, Account management"
+            ]
+        },
+        "Health and fitness": {
+            "Health info": [
+                "App functionality"
+            ]
+        },
+        "App activity": {
+            "App interactions": [
+                "Analytics, Advertising or marketing"
+            ],
+            "In-app search history": [
+                "App functionality, Analytics, Advertising or marketing, Personalization"
+            ]
+        },
+        "App info and performance": {
+            "Crash logs": [
+                "Analytics"
+            ],
+            "Diagnostics": [
+                "Analytics"
+            ],
+            "Other app performance data": [
+                "Analytics"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ]
+        }
+    },
+    "Security practices": {
+        "Data is encrypted in transit": null,
+        "Data can\u2019t be deleted": null
+    }
+}

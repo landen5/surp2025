@@ -1,0 +1,54 @@
+{
+    "App name": "Drawing Desk: Draw, Paint Art",
+    "App category": [
+        "Art & Design"
+    ],
+    "URL": "https://play.google.com/store/apps/details?id=com.axis.drawingdesk.v3&hl=en_US",
+    "App ID": "com.axis.drawingdesk.v3",
+    "Average rating": "4.1",
+    "Total reviews": "105000",
+    "Contains ads": true,
+    "In-app purchases": true,
+    "Downloads": "10000000+",
+    "Price": "$0.00",
+    "No data shared with third parties": {},
+    "This app may collect these data types": "Personal info, Photos and videos and 3 others",
+    "Data isn\u2019t encrypted": null,
+    "Data can\u2019t be deleted": null,
+    "Committed to follow the Play Families Policy": null,
+    "Data collected": {
+        "Personal info": {
+            "Name": [
+                "App functionality, Developer communications, Personalization, Account management"
+            ],
+            "Email address": [
+                "App functionality, Developer communications, Advertising or marketing, Personalization, Account management"
+            ]
+        },
+        "Photos and videos": {
+            "Photos": [
+                "App functionality, Account management"
+            ]
+        },
+        "App activity": {
+            "App interactions": [
+                "Analytics"
+            ]
+        },
+        "App info and performance": {
+            "Crash logs": [
+                "Analytics"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "App functionality, Developer communications, Personalization"
+            ]
+        }
+    },
+    "Security practices": {
+        "Data isn\u2019t encrypted": null,
+        "Data can\u2019t be deleted": null,
+        "Committed to follow the Play Families Policy": null
+    }
+}
