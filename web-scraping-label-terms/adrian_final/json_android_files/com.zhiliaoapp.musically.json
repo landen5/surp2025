@@ -1,0 +1,146 @@
+{
+    "App name": "N/A",
+    "App category": [
+        "Social"
+    ],
+    "URL": "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically&hl=en_US",
+    "App ID": "com.zhiliaoapp.musically",
+    "Average rating": "4.1",
+    "Total reviews": "665000000",
+    "Contains ads": true,
+    "In-app purchases": true,
+    "Downloads": "",
+    "Price": "0",
+    "This app may share these data types with third parties": "Personal info, Photos and videos and 2 others",
+    "This app may collect these data types": "Location, Personal info and 9 others",
+    "Data is encrypted in transit": null,
+    "You can request that data be deleted": null,
+    "Data shared": {
+        "Personal info": {
+            "Name": [
+                "Analytics"
+            ],
+            "User IDs": [
+                "Analytics"
+            ]
+        },
+        "App activity": {
+            "Other user-generated content": [
+                "Analytics"
+            ]
+        },
+        "Photos and videos": {
+            "Photos": [
+                "Analytics"
+            ],
+            "Videos": [
+                "Analytics"
+            ]
+        },
+        "Audio": {
+            "Voice or sound recordings": [
+                "Analytics"
+            ]
+        }
+    },
+    "Data collected": {
+        "Personal info": {
+            "Name": [
+                "App functionality, Fraud prevention, security, and compliance, Account management"
+            ],
+            "Email address": [
+                "App functionality, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Account management"
+            ],
+            "User IDs": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ],
+            "Address": [
+                "App functionality, Fraud prevention, security, and compliance, Account management"
+            ],
+            "Phone number": [
+                "App functionality, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Account management"
+            ],
+            "Other info": [
+                "App functionality, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ]
+        },
+        "App info and performance": {
+            "Crash logs": [
+                "App functionality, Analytics"
+            ],
+            "Diagnostics": [
+                "App functionality, Analytics, Fraud prevention, security, and compliance"
+            ],
+            "Other app performance data": [
+                "App functionality, Analytics"
+            ]
+        },
+        "App activity": {
+            "App interactions": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ],
+            "In-app search history": [
+                "App functionality, Analytics, Advertising or marketing, Personalization"
+            ],
+            "Other user-generated content": [
+                "App functionality, Advertising or marketing, Fraud prevention, security, and compliance, Account management"
+            ],
+            "Other actions": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ]
+        },
+        "Contacts": {
+            "Contacts": [
+                "App functionality, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ]
+        },
+        "Photos and videos": {
+            "Photos": [
+                "App functionality, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "Videos": [
+                "App functionality, Fraud prevention, security, and compliance, Personalization, Account management"
+            ]
+        },
+        "Web browsing": {
+            "Web browsing history": [
+                "Advertising or marketing"
+            ]
+        },
+        "Audio": {
+            "Voice or sound recordings": [
+                "App functionality, Fraud prevention, security, and compliance"
+            ]
+        },
+        "Messages": {
+            "Other in-app messages": [
+                "Fraud prevention, security, and compliance"
+            ]
+        },
+        "Financial info": {
+            "User payment info": [
+                "App functionality, Fraud prevention, security, and compliance"
+            ],
+            "Purchase history": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ],
+            "Other financial info": [
+                "App functionality, Fraud prevention, security, and compliance"
+            ]
+        },
+        "Location": {
+            "Approximate location": [
+                "App functionality, Analytics, Advertising or marketing, Personalization"
+            ]
+        }
+    },
+    "Security practices": {
+        "Data is encrypted in transit": null,
+        "You can request that data be deleted": null
+    }
+}

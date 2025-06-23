@@ -1,0 +1,161 @@
+{
+    "App name": "TextNow: Call + Text Unlimited",
+    "App category": [
+        "Communication"
+    ],
+    "URL": "https://play.google.com/store/apps/details?id=com.enflick.android.TextNow&hl=en_US",
+    "App ID": "com.enflick.android.TextNow",
+    "Average rating": "4.5",
+    "Total reviews": "127000000",
+    "Contains ads": true,
+    "In-app purchases": true,
+    "Downloads": "50000000+",
+    "Price": "$0.00",
+    "This app may share these data types with third parties": "Location, Personal info and 4 others",
+    "This app may collect these data types": "Location, Personal info and 7 others",
+    "Data is encrypted in transit": null,
+    "You can request that data be deleted": null,
+    "Data shared": {
+        "Location": {
+            "Approximate location": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance"
+            ],
+            "Precise location": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ]
+        },
+        "Personal info": {
+            "Email address": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ],
+            "User IDs": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "Phone number": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance"
+            ]
+        },
+        "Financial info": {
+            "User payment info": [
+                "App functionality, Account management"
+            ]
+        },
+        "App activity": {
+            "App interactions": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ],
+            "Installed apps": [
+                "Advertising or marketing"
+            ],
+            "Other actions": [
+                "Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ]
+        },
+        "App info and performance": {
+            "Crash logs": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ],
+            "Diagnostics": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ],
+            "Other app performance data": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ]
+        }
+    },
+    "Data collected": {
+        "Location": {
+            "Approximate location": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "Precise location": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ]
+        },
+        "Personal info": {
+            "Name": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "Email address": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Account management"
+            ],
+            "User IDs": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "Address": [
+                "Account management"
+            ],
+            "Phone number": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Account management"
+            ],
+            "Other info": [
+                "App functionality, Fraud prevention, security, and compliance, Account management"
+            ]
+        },
+        "Financial info": {
+            "Purchase history": [
+                "App functionality"
+            ]
+        },
+        "Messages": {
+            "SMS or MMS": [
+                "App functionality, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance"
+            ],
+            "Other in-app messages": [
+                "App functionality, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance"
+            ]
+        },
+        "Audio": {
+            "Voice or sound recordings": [
+                "App functionality"
+            ],
+            "Other audio files": [
+                "App functionality"
+            ]
+        },
+        "Contacts": {
+            "Contacts": [
+                "App functionality"
+            ]
+        },
+        "App activity": {
+            "App interactions": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ],
+            "Installed apps": [
+                "Advertising or marketing"
+            ],
+            "Other user-generated content": [
+                "App functionality"
+            ],
+            "Other actions": [
+                "Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ]
+        },
+        "App info and performance": {
+            "Crash logs": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ],
+            "Diagnostics": [
+                "Analytics, Advertising or marketing"
+            ],
+            "Other app performance data": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ]
+        }
+    },
+    "Security practices": {
+        "Data is encrypted in transit": null,
+        "You can request that data be deleted": null
+    }
+}

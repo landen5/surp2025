@@ -1,0 +1,84 @@
+{
+    "App name": "Pluto TV - Live TV and Movies",
+    "App category": [
+        "Entertainment"
+    ],
+    "URL": "https://play.google.com/store/apps/details?id=tv.pluto.android&hl=en_US",
+    "App ID": "tv.pluto.android",
+    "Average rating": "3.9",
+    "Total reviews": "601000",
+    "Contains ads": true,
+    "In-app purchases": false,
+    "Downloads": "100000000+",
+    "Price": "$0.00",
+    "This app may share these data types with third parties": "Location, Personal info and 2 others",
+    "This app may collect these data types": "Location, Personal info and 2 others",
+    "Data is encrypted in transit": null,
+    "Data can\u2019t be deleted": null,
+    "Data shared": {
+        "Location": {
+            "Approximate location": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ]
+        },
+        "Personal info": {
+            "Name": [
+                "App functionality, Developer communications, Account management"
+            ],
+            "Email address": [
+                "App functionality, Account management"
+            ]
+        },
+        "App info and performance": {
+            "Crash logs": [
+                "Analytics"
+            ],
+            "Diagnostics": [
+                "Analytics"
+            ],
+            "Other app performance data": [
+                "Analytics"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "Analytics, Advertising or marketing"
+            ]
+        }
+    },
+    "Data collected": {
+        "Location": {
+            "Approximate location": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+            ]
+        },
+        "Personal info": {
+            "Name": [
+                "App functionality, Developer communications, Account management"
+            ],
+            "Email address": [
+                "App functionality, Developer communications, Fraud prevention, security, and compliance, Account management"
+            ],
+            "User IDs": [
+                "App functionality, Fraud prevention, security, and compliance, Account management"
+            ],
+            "Other info": [
+                "Account management"
+            ]
+        },
+        "App activity": {
+            "Other actions": [
+                "App functionality, Analytics, Account management"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "App functionality, Analytics, Advertising or marketing"
+            ]
+        }
+    },
+    "Security practices": {
+        "Data is encrypted in transit": null,
+        "Data can\u2019t be deleted": null
+    }
+}

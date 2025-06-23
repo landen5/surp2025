@@ -1,0 +1,34 @@
+{
+    "App name": "BeautyPlus - Retouch, Filters",
+    "App category": [
+        "Photography"
+    ],
+    "URL": "https://play.google.com/store/apps/details?id=com.commsource.beautyplus&hl=en_US",
+    "App ID": "com.commsource.beautyplus",
+    "Average rating": "4.4",
+    "Total reviews": "492000000",
+    "Contains ads": true,
+    "In-app purchases": true,
+    "Downloads": "100000000+",
+    "Price": "$0.00",
+    "No data shared with third parties": {},
+    "This app may collect these data types": "App info and performance and Device or other IDs",
+    "Data is encrypted in transit": null,
+    "Data can\u2019t be deleted": null,
+    "Data collected": {
+        "App info and performance": {
+            "Crash logs": [
+                "Analytics"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "Analytics, Advertising or marketing"
+            ]
+        }
+    },
+    "Security practices": {
+        "Data is encrypted in transit": null,
+        "Data can\u2019t be deleted": null
+    }
+}

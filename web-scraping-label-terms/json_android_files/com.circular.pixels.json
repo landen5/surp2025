@@ -1,0 +1,79 @@
+{
+    "App name": "Pixelcut AI Photo Editor",
+    "App category": [
+        "Art & Design"
+    ],
+    "URL": "https://play.google.com/store/apps/details?id=com.circular.pixels&hl=en_US",
+    "App ID": "com.circular.pixels",
+    "Average rating": "4.4",
+    "Total reviews": "579000",
+    "Contains ads": false,
+    "In-app purchases": true,
+    "Downloads": "1000000+",
+    "Price": "$0.00",
+    "This app may share these data types with third parties": "Personal info, App activity and 2 others",
+    "This app may collect these data types": "Personal info, Financial info and 4 others",
+    "Data is encrypted in transit": null,
+    "You can request that data be deleted": null,
+    "Data shared": {
+        "Personal info": {
+            "User IDs": [
+                "App functionality, Analytics, Account management"
+            ]
+        },
+        "App activity": {
+            "App interactions": [
+                "Analytics"
+            ]
+        },
+        "App info and performance": {
+            "Diagnostics": [
+                "Analytics, Fraud prevention, security, and compliance"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance"
+            ]
+        }
+    },
+    "Data collected": {
+        "Personal info": {
+            "User IDs": [
+                "App functionality, Analytics, Fraud prevention, security, and compliance, Account management"
+            ]
+        },
+        "Financial info": {
+            "Purchase history": [
+                "App functionality, Analytics"
+            ]
+        },
+        "Photos and videos": {
+            "Photos": [
+                "App functionality"
+            ]
+        },
+        "App activity": {
+            "App interactions": [
+                "Analytics"
+            ]
+        },
+        "App info and performance": {
+            "Crash logs": [
+                "Analytics, Fraud prevention, security, and compliance"
+            ],
+            "Diagnostics": [
+                "Analytics, Fraud prevention, security, and compliance"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Account management"
+            ]
+        }
+    },
+    "Security practices": {
+        "Data is encrypted in transit": null,
+        "You can request that data be deleted": null
+    }
+}

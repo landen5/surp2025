@@ -1,0 +1,112 @@
+{
+    "App name": "Max: Stream HBO, TV, & Movies",
+    "App category": [
+        "Entertainment"
+    ],
+    "URL": "https://play.google.com/store/apps/details?id=com.wbd.stream&hl=en_US",
+    "App ID": "com.wbd.stream",
+    "Average rating": "4.6",
+    "Total reviews": "130000",
+    "Contains ads": true,
+    "In-app purchases": true,
+    "Downloads": "5000000+",
+    "Price": "$0.00",
+    "This app may share these data types with third parties": "Location, Personal info and 2 others",
+    "This app may collect these data types": "Location, Personal info and 4 others",
+    "Data is encrypted in transit": null,
+    "You can request that data be deleted": null,
+    "Data shared": {
+        "Location": {
+            "Approximate location": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ]
+        },
+        "Personal info": {
+            "Name": [
+                "Advertising or marketing, Personalization"
+            ],
+            "Email address": [
+                "App functionality, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "User IDs": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "Other info": [
+                "Advertising or marketing, Personalization"
+            ]
+        },
+        "App activity": {
+            "App interactions": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "Other actions": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ]
+        }
+    },
+    "Data collected": {
+        "Location": {
+            "Approximate location": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ]
+        },
+        "Personal info": {
+            "Name": [
+                "Advertising or marketing, Personalization"
+            ],
+            "Email address": [
+                "App functionality, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "User IDs": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "Other info": [
+                "Advertising or marketing, Personalization"
+            ]
+        },
+        "Messages": {
+            "Other in-app messages": [
+                "Analytics"
+            ]
+        },
+        "App activity": {
+            "App interactions": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "In-app search history": [
+                "App functionality, Analytics, Fraud prevention, security, and compliance, Personalization, Account management"
+            ],
+            "Installed apps": [
+                "Analytics"
+            ],
+            "Other actions": [
+                "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ]
+        },
+        "App info and performance": {
+            "Crash logs": [
+                "App functionality, Analytics, Fraud prevention, security, and compliance, Account management"
+            ],
+            "Diagnostics": [
+                "App functionality, Analytics, Fraud prevention, security, and compliance, Account management"
+            ],
+            "Other app performance data": [
+                "App functionality, Analytics, Fraud prevention, security, and compliance, Account management"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization, Account management"
+            ]
+        }
+    },
+    "Security practices": {
+        "Data is encrypted in transit": null,
+        "You can request that data be deleted": null
+    }
+}

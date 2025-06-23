@@ -1,0 +1,52 @@
+{
+    "App name": "Opera GX: Gaming Browser",
+    "App category": [
+        "Communication"
+    ],
+    "URL": "https://play.google.com/store/apps/details?id=com.opera.gx&hl=en_US",
+    "App ID": "com.opera.gx",
+    "Average rating": "4.7",
+    "Total reviews": "101000",
+    "Contains ads": false,
+    "In-app purchases": false,
+    "Downloads": "10000000+",
+    "Price": "$0.00",
+    "This app may share these data types with third parties": "App info and performance and Device or other IDs",
+    "This app may collect these data types": "App info and performance and Device or other IDs",
+    "Data is encrypted in transit": null,
+    "You can request that data be deleted": null,
+    "Data shared": {
+        "App info and performance": {
+            "Crash logs": [
+                "Analytics"
+            ],
+            "Diagnostics": [
+                "Analytics"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "Analytics, Developer communications"
+            ]
+        }
+    },
+    "Data collected": {
+        "App info and performance": {
+            "Crash logs": [
+                "Analytics"
+            ],
+            "Diagnostics": [
+                "Analytics"
+            ]
+        },
+        "Device or other IDs": {
+            "Device or other IDs": [
+                "Analytics, Developer communications"
+            ]
+        }
+    },
+    "Security practices": {
+        "Data is encrypted in transit": null,
+        "You can request that data be deleted": null
+    }
+}
