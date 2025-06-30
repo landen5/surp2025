@@ -9,10 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "App needs access to your location to fetch coarse location for research purposes."
-      }
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
@@ -20,11 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.landen5.myapp",
-      "permissions": [
-        "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION"
-      ]
+      "package": "com.landen5.myapp"
     },
     "web": {
       "bundler": "metro",

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import {
-  Text, View, TextInput, TouchableOpacity, StyleSheet, Alert,
-  Platform, ScrollView
+import { 
+  Text, 
+  View, 
+  TextInput, 
+  TouchableOpacity, 
+  StyleSheet, 
+  Alert, 
+  Platform,
+  ScrollView 
 } from "react-native";
 import * as Location from 'expo-location';
 
@@ -9,11 +15,29 @@ export default function Index() {
   const [userData, setUserData] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [responseData, setResponseData] = useState(null);
-  const [coarseLocation, setCoarseLocation] = useState<{ latitude: number; longitude: number; accuracy: number } | null>(null);
+  const [location, setLocation] = useState<Location.LocationObjectCoords | null>(null);
   const [isFetchingLocation, setIsFetchingLocation] = useState(false);
-  const API_URL = Platform.OS === 'android'
-    ? 'http://10.0.2.2:5050/api/data'
-    : 'http://127.0.0.1:5050/api/data';
+  const API_URL = 'https://surp2025.duckdns.org/api/data'; 
+
+  // fetch approximate device location
+  const getCoarseLocation = async () => {
+    if (isFetchingLocation) return;
+    setIsFetchingLocation(true);
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== Location.PermissionStatus.GRANTED) {
+        Alert.alert('Permission denied', 'Cannot fetch location.');
+        return;
+      }
+      const loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Lowest });
+      setLocation(loc.coords);
+    } catch (e) {
+      console.error(e);
+      Alert.alert('Error', 'Unable to get location.');
+    } finally {
+      setIsFetchingLocation(false);
+    }
+  };
 
   const sendData = async () => {
     if (!userData.trim()) {
@@ -36,7 +60,11 @@ export default function Index() {
             platform: Platform.OS,
             version: Platform.Version,
           },
-  
+          location: location ? {
+            latitude: location.latitude,
+            longitude: location.longitude,
+            accuracy: location.accuracy,
+          } : null,
         }),
       });
 
@@ -50,30 +78,6 @@ export default function Index() {
       Alert.alert('Error', 'Failed to send data. Check your connection and server status.');
     } finally {
       setIsSending(false);
-    }
-  };
-
-  const getCoarseLocation = async () => {
-    if (isFetchingLocation) return;
-    setIsFetchingLocation(true);
-    try {
-      // request and fetch via expo-location
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== Location.PermissionStatus.GRANTED) {
-        Alert.alert('Permission denied', 'Cannot fetch location.');
-        return;
-      }
-      const loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Lowest });
-      const latitude = loc.coords.latitude ?? 0;
-      const longitude = loc.coords.longitude ?? 0;
-      const accuracy = loc.coords.accuracy ?? 0;
-      setCoarseLocation({ latitude, longitude, accuracy });
-      Alert.alert('Location fetched', 'Got approximate location');
-    } catch (e) {
-      console.error(e);
-      Alert.alert('Error', 'Unexpected error fetching location.');
-    } finally {
-      setIsFetchingLocation(false);
     }
   };
 
@@ -108,29 +112,32 @@ export default function Index() {
           </Text>
         </TouchableOpacity>
         
+        {/* location button */}
         <TouchableOpacity
-          style={styles.button}
+          style={[styles.button, { marginTop: 12 }]}
           onPress={getCoarseLocation}
           disabled={isFetchingLocation}
         >
           <Text style={styles.buttonText}>
-            {isFetchingLocation ? 'Fetching Location...' : 'Get Coarse Location'}
+            {isFetchingLocation ? 'Fetching...' : 'Get Location'}
           </Text>
         </TouchableOpacity>
+
+        {/* display location info */}
+        {location && (
+          <View style={styles.responseContainer}>
+            <Text style={styles.responseTitle}>Location Info:</Text>
+            <Text style={styles.responseText}>
+              {`Latitude: ${location.latitude}\nLongitude: ${location.longitude}\nAccuracy: ${location.accuracy}m`}
+            </Text>
+          </View>
+        )}
 
         {responseData && (
           <View style={styles.responseContainer}>
             <Text style={styles.responseTitle}>Server Response:</Text>
             <Text style={styles.responseText}>
               {JSON.stringify(responseData, null, 2)}
-            </Text>
-          </View>
-        )}
-        {coarseLocation && (
-          <View style={styles.responseContainer}>
-            <Text style={styles.responseTitle}>Coarse Location:</Text>
-            <Text style={styles.responseText}>
-              {JSON.stringify(coarseLocation, null, 2)}
             </Text>
           </View>
         )}
