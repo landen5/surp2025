@@ -1,0 +1,151 @@
+import json
+import argparse
+from urllib.parse import urlparse, urlunparse
+import ast
+import uuid
+
+# --- generate_context_snippet and find_data_occurrences are unchanged ---
+def generate_context_snippet(content, term, location_type):
+    # (This function is unchanged)
+    if location_type not in ["Request Body", "Response Body"]: return content
+    parsed_data = None
+    if isinstance(content, (dict, list)): parsed_data = content
+    elif isinstance(content, str):
+        try: parsed_data = json.loads(content)
+        except json.JSONDecodeError:
+            try: parsed_data = ast.literal_eval(content)
+            except (ValueError, SyntaxError, MemoryError, TypeError): parsed_data = None
+    if parsed_data:
+        try: pretty_content = json.dumps(parsed_data, indent=2); lines = pretty_content.split('\n')
+        except TypeError: lines = str(parsed_data).split('\n')
+    else: lines = str(content).split('\n')
+    snippet_lines = []; line_num_with_term = -1
+    for i, line in enumerate(lines):
+        if term in line: line_num_with_term = i; break
+    if line_num_with_term != -1:
+        start = max(0, line_num_with_term - 2); end = min(len(lines), line_num_with_term + 3)
+        for i in range(start, end):
+            prefix = "  > " if i == line_num_with_term else "    "; snippet_lines.append(f"{prefix}{lines[i]}")
+        return "\n".join(snippet_lines)
+    return str(content)
+
+def find_data_occurrences(har_file_path, search_terms, filter_methods=None):
+    # (This function is unchanged)
+    try:
+        with open(har_file_path, 'r', encoding='utf-8') as f: har_data = json.load(f)
+    except Exception as e: print(f"Error reading or parsing HAR file: {e}"); return None
+    all_findings = [];
+    if filter_methods: filter_methods = [m.upper() for m in filter_methods]
+    for entry in har_data.get('log', {}).get('entries', []):
+        request = entry.get('request', {}); response = entry.get('response', {}); method = request.get('method', '').upper()
+        if (not request) or (filter_methods and method not in filter_methods): continue
+        url = request.get('url');
+        if not url: continue
+        hostname = urlparse(url).hostname
+        def add_finding(term, location, content, location_type):
+            snippet = generate_context_snippet(content, term, location_type)
+            all_findings.append({ "method": method, "url": url, "hostname": hostname, "search_term": term, "location": location, "context_snippet": snippet })
+        for term in search_terms:
+            if term in url: add_finding(term, "URL", url, "URL")
+            for header in request.get('headers', []):
+                if term in header.get('value', ''): add_finding(term, f"Request Header ('{header.get('name')}')", f"{header.get('name')}: {header.get('value')}", "Header")
+            if 'postData' in request and 'text' in request['postData']:
+                body_content = request['postData']['text']
+                if body_content and term in str(body_content): add_finding(term, "Request Body", body_content, "Request Body")
+            if 'content' in response and 'text' in response['content']:
+                response_content = response['content']['text']
+                if response_content and term in str(response_content): add_finding(term, "Response Body", response_content, "Response Body")
+    return all_findings
+
+def generate_rules_file(findings_to_export, action_choice, filename):
+    # (This function is unchanged)
+    METHOD_MAP = { 'GET': 0, 'POST': 1, 'PUT': 2, 'DELETE': 3, 'PATCH': 4, 'HEAD': 5, 'OPTIONS': 6 }
+    action_step = {}
+    if action_choice == '1': action_step = { "type": "close-connection" }
+    elif action_choice == '2': action_step = { "type": "simple", "status": 403, "statusMessage": "Forbidden", "headers": {}, "data": "Blocked by generated privacy rule." }
+    elif action_choice == '3': action_step = { "type": "passthrough", "uiType": "request-breakpoint" }
+    rules = []
+    for finding in findings_to_export:
+        matchers = []
+        if finding['method'] in METHOD_MAP:
+            matchers.append({ "method": METHOD_MAP[finding['method']], "type": "method", "uiType": finding['method'] })
+        matchers.append({ "type": "simple-path", "path": finding['url'] })
+        rule = { "id": str(uuid.uuid4()), "type": "http", "activated": True, "matchers": matchers, "steps": [action_step], "completionChecker": { "type": "always" } }
+        rules.append(rule)
+    default_pass_through_rule = { "id": "default-wildcard", "type": "http", "activated": True, "matchers": [{"type": "wildcard", "uiType": "default-wildcard"}], "steps": [{"type": "passthrough"}], "completionChecker": {"type": "always"} }
+    rules.append(default_pass_through_rule)
+    final_json = { "id": "generated-privacy-rules", "title": "Generated Privacy Blocklist", "items": rules }
+    try:
+        with open(filename, 'w') as f: json.dump(final_json, f, indent=2)
+        print(f"\n✅ Successfully generated rules file: '{filename}'")
+        print("   Go to HTTP Toolkit -> Modify -> 'Import rules' to use it.")
+    except Exception as e: print(f"\n❌ Error writing to file: {e}")
+
+
+# --- UPDATED INTERACTIVE SESSION WITH 'all' OPTION ---
+def interactive_session(findings):
+    if not findings: print("[-] No occurrences matching your criteria were found."); return
+    print(f"[+] Found {len(findings)} total matching occurrence(s).")
+    while True:
+        print("\n" + "---" * 15)
+        for i, find in enumerate(findings):
+            url_display = (find['url'][:75] + '...') if len(find['url']) > 75 else find['url']; print(f"  [{i+1}] {find['method']} to {find['hostname']} - Found '{find['search_term']}' in {find['location']}")
+        print("---" * 15)
+        try:
+            choice = input(f"Enter a number to see details, 'g' to generate rules, or 'q' to quit: ")
+            if choice.lower() == 'q': break
+            elif choice.lower() == 'g':
+                # <-- CHANGE IS HERE -->
+                nums_to_export_str = input("Enter numbers to export (e.g., 1, 3, 4), or type 'all' for every finding: ")
+
+                findings_to_export = []
+                if nums_to_export_str.lower().strip() == 'all':
+                    # If user types 'all', use all findings
+                    findings_to_export = findings
+                else:
+                    # Otherwise, use the existing logic for specific numbers
+                    try:
+                        indices_to_export = [int(n.strip()) - 1 for n in nums_to_export_str.split(',')]
+                        findings_to_export = [findings[i] for i in indices_to_export if 0 <= i < len(findings)]
+                    except ValueError:
+                        print("Invalid input. Please enter numbers separated by commas or 'all'.")
+                        continue
+                
+                if not findings_to_export:
+                    print("No valid findings selected.")
+                    continue
+                # <-- END OF CHANGE -->
+
+                print(f"\nGenerating rules for {len(findings_to_export)} finding(s).")
+                print("\nWhat kind of rule do you want to create?\n  [1] Close connection immediately (Hard block)\n  [2] Return a 403 Forbidden error (Informative block)\n  [3] Pause the request for manual editing (Debug/Modify)")
+                action_choice = input("Choose an action [1/2/3]: ")
+                if action_choice not in ['1', '2', '3']: print("Invalid action choice."); continue
+                filename = input("Enter a filename for the rules (default: httptoolkit-rules.json): ");
+                if not filename: filename = "httptoolkit-rules.json"
+                generate_rules_file(findings_to_export, action_choice, filename)
+
+            else:
+                index = int(choice) - 1
+                if 0 <= index < len(findings):
+                    selected = findings[index]
+                    print("\n" + "="*20 + f" Details for Finding #{index+1} " + "="*20)
+                    print(f"Method:   {selected['method']}\nHost:     {selected['hostname']}\nFull URL: {selected['url']}\nFound:    '{selected['search_term']}'\nLocation: {selected['location']}")
+                    print("-" * 15 + " Context Snippet " + "-"*15); print(selected['context_snippet']); print("="*59)
+                else: print("Invalid number. Please try again.")
+        except (ValueError, IndexError): print("Invalid input. Please enter a number from the list, 'g', or 'q'.")
+        except KeyboardInterrupt: print("\nExiting."); break
+
+def main():
+    # (This function is unchanged)
+    parser = argparse.ArgumentParser( description="Interactively analyze a HAR file and generate HTTP Toolkit rules.", formatter_class=argparse.RawTextHelpFormatter)
+    parser.add_argument("har_file", help="Path to the .har file to analyze.")
+    parser.add_argument("--data", required=True, nargs='+', help="Personal data to search for.")
+    parser.add_argument("--method", nargs='+', help="Filter for specific HTTP methods (e.g., POST GET).")
+    args = parser.parse_args()
+    filter_text = f" and filtering for {', '.join(args.method).upper()} requests" if args.method else ""
+    print(f"[*] Analyzing '{args.har_file}' for: {', '.join(args.data)}{filter_text}\n")
+    all_findings = find_data_occurrences(args.har_file, args.data, args.method)
+    if all_findings is not None: interactive_session(all_findings)
+
+if __name__ == "__main__":
+    main()
