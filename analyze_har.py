@@ -4,9 +4,9 @@ from urllib.parse import urlparse, urlunparse
 import ast
 import uuid
 
-# --- generate_context_snippet and find_data_occurrences are unchanged ---
+# All helper functions (generate_context_snippet, etc.) are unchanged.
+
 def generate_context_snippet(content, term, location_type):
-    # (This function is unchanged)
     if location_type not in ["Request Body", "Response Body"]: return content
     parsed_data = None
     if isinstance(content, (dict, list)): parsed_data = content
@@ -30,7 +30,6 @@ def generate_context_snippet(content, term, location_type):
     return str(content)
 
 def find_data_occurrences(har_file_path, search_terms, filter_methods=None):
-    # (This function is unchanged)
     try:
         with open(har_file_path, 'r', encoding='utf-8') as f: har_data = json.load(f)
     except Exception as e: print(f"Error reading or parsing HAR file: {e}"); return None
@@ -42,10 +41,14 @@ def find_data_occurrences(har_file_path, search_terms, filter_methods=None):
         url = request.get('url');
         if not url: continue
         hostname = urlparse(url).hostname
-        def add_finding(term, location, content, location_type):
-            snippet = generate_context_snippet(content, term, location_type)
-            all_findings.append({ "method": method, "url": url, "hostname": hostname, "search_term": term, "location": location, "context_snippet": snippet })
+        found_in_entry = set()
         for term in search_terms:
+            def add_finding(term, location, content, location_type):
+                finding_key = (method, url, location, term)
+                if finding_key not in found_in_entry:
+                    snippet = generate_context_snippet(content, term, location_type)
+                    all_findings.append({ "method": method, "url": url, "hostname": hostname, "search_term": term, "location": location, "context_snippet": snippet })
+                    found_in_entry.add(finding_key)
             if term in url: add_finding(term, "URL", url, "URL")
             for header in request.get('headers', []):
                 if term in header.get('value', ''): add_finding(term, f"Request Header ('{header.get('name')}')", f"{header.get('name')}: {header.get('value')}", "Header")
@@ -58,7 +61,6 @@ def find_data_occurrences(har_file_path, search_terms, filter_methods=None):
     return all_findings
 
 def generate_rules_file(findings_to_export, action_choice, filename):
-    # (This function is unchanged)
     METHOD_MAP = { 'GET': 0, 'POST': 1, 'PUT': 2, 'DELETE': 3, 'PATCH': 4, 'HEAD': 5, 'OPTIONS': 6 }
     action_step = {}
     if action_choice == '1': action_step = { "type": "close-connection" }
@@ -81,8 +83,6 @@ def generate_rules_file(findings_to_export, action_choice, filename):
         print("   Go to HTTP Toolkit -> Modify -> 'Import rules' to use it.")
     except Exception as e: print(f"\n❌ Error writing to file: {e}")
 
-
-# --- UPDATED INTERACTIVE SESSION WITH 'all' OPTION ---
 def interactive_session(findings):
     if not findings: print("[-] No occurrences matching your criteria were found."); return
     print(f"[+] Found {len(findings)} total matching occurrence(s).")
@@ -95,35 +95,21 @@ def interactive_session(findings):
             choice = input(f"Enter a number to see details, 'g' to generate rules, or 'q' to quit: ")
             if choice.lower() == 'q': break
             elif choice.lower() == 'g':
-                # <-- CHANGE IS HERE -->
                 nums_to_export_str = input("Enter numbers to export (e.g., 1, 3, 4), or type 'all' for every finding: ")
-
                 findings_to_export = []
-                if nums_to_export_str.lower().strip() == 'all':
-                    # If user types 'all', use all findings
-                    findings_to_export = findings
+                if nums_to_export_str.lower().strip() == 'all': findings_to_export = findings
                 else:
-                    # Otherwise, use the existing logic for specific numbers
                     try:
-                        indices_to_export = [int(n.strip()) - 1 for n in nums_to_export_str.split(',')]
-                        findings_to_export = [findings[i] for i in indices_to_export if 0 <= i < len(findings)]
-                    except ValueError:
-                        print("Invalid input. Please enter numbers separated by commas or 'all'.")
-                        continue
-                
-                if not findings_to_export:
-                    print("No valid findings selected.")
-                    continue
-                # <-- END OF CHANGE -->
-
+                        indices_to_export = [int(n.strip()) - 1 for n in nums_to_export_str.split(',')]; findings_to_export = [findings[i] for i in indices_to_export if 0 <= i < len(findings)]
+                    except ValueError: print("Invalid input. Please enter numbers separated by commas or 'all'."); continue
+                if not findings_to_export: print("No valid findings selected."); continue
                 print(f"\nGenerating rules for {len(findings_to_export)} finding(s).")
                 print("\nWhat kind of rule do you want to create?\n  [1] Close connection immediately (Hard block)\n  [2] Return a 403 Forbidden error (Informative block)\n  [3] Pause the request for manual editing (Debug/Modify)")
-                action_choice = input("Choose an action [1/2/3]: ")
+                action_choice = input("Choose an action [1/2/3]: ");
                 if action_choice not in ['1', '2', '3']: print("Invalid action choice."); continue
                 filename = input("Enter a filename for the rules (default: httptoolkit-rules.json): ");
                 if not filename: filename = "httptoolkit-rules.json"
                 generate_rules_file(findings_to_export, action_choice, filename)
-
             else:
                 index = int(choice) - 1
                 if 0 <= index < len(findings):
@@ -135,17 +121,51 @@ def interactive_session(findings):
         except (ValueError, IndexError): print("Invalid input. Please enter a number from the list, 'g', or 'q'.")
         except KeyboardInterrupt: print("\nExiting."); break
 
+# --- MAIN FUNCTION: UPDATED with --device ---
 def main():
-    # (This function is unchanged)
-    parser = argparse.ArgumentParser( description="Interactively analyze a HAR file and generate HTTP Toolkit rules.", formatter_class=argparse.RawTextHelpFormatter)
+    parser = argparse.ArgumentParser(
+        description="Interactively analyze a HAR file for specific data and generate HTTP Toolkit rules.",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
     parser.add_argument("har_file", help="Path to the .har file to analyze.")
-    parser.add_argument("--data", required=True, nargs='+', help="Personal data to search for.")
-    parser.add_argument("--method", nargs='+', help="Filter for specific HTTP methods (e.g., POST GET).")
+    parser.add_argument(
+        "--data", nargs='*', help="One-off specific data to search for (e.g., an email)."
+    )
+    # <<-- CHANGE IS HERE -->>
+    parser.add_argument(
+        '--device', help="Path to a text file containing device-specific IDs (one per line)."
+    )
+    parser.add_argument(
+        "--method", nargs='+', help="Filter results for specific HTTP methods (e.g., POST GET)."
+    )
     args = parser.parse_args()
-    filter_text = f" and filtering for {', '.join(args.method).upper()} requests" if args.method else ""
-    print(f"[*] Analyzing '{args.har_file}' for: {', '.join(args.data)}{filter_text}\n")
-    all_findings = find_data_occurrences(args.har_file, args.data, args.method)
-    if all_findings is not None: interactive_session(all_findings)
+
+    # Build the final list of terms to search for
+    search_terms = []
+    # <<-- AND HERE -->>
+    if args.device:
+        try:
+            with open(args.device, 'r') as f:
+                for line in f:
+                    clean_line = line.strip()
+                    if clean_line:
+                        search_terms.append(clean_line)
+        except FileNotFoundError:
+            parser.error(f"The specified device ID file was not found: {args.device}")
+    
+    if args.data:
+        search_terms.extend(args.data)
+
+    if not search_terms:
+        parser.error("No data to search for. You must use --data or --device.")
+
+    final_search_terms = sorted(list(set(search_terms)))
+    print(f"[*] Analyzing '{args.har_file}' for {len(final_search_terms)} specific term(s)...\n")
+    
+    all_findings = find_data_occurrences(args.har_file, final_search_terms, args.method)
+
+    if all_findings is not None:
+        interactive_session(all_findings)
 
 if __name__ == "__main__":
     main()

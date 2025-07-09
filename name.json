@@ -1,0 +1,697 @@
+{
+  "id": "generated-privacy-rules",
+  "title": "Generated Privacy Blocklist",
+  "items": [
+    {
+      "id": "81307628-8bd6-4e2d-b209-af99089a9672",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "f6cfdaa4-0fd3-42a8-89d8-b0780e365aec",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "d7cacda3-71a1-4a58-9b64-cbdf3b9a8232",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "9ee5004b-e3d0-4174-93ff-65859326a898",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "3d285cae-fb6b-40d9-9de1-b39253f4ee59",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "1e3e361b-d1ea-48c0-a19c-52b7eaf32fd1",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "77953929-007c-4161-942b-f19e33aa876a",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "23695419-f800-478e-844c-32e410a0de61",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "733c543c-54ae-44d9-ae43-7c53b9c8870b",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "46e0cdb5-bab8-4874-85ec-39f7dcacfe28",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "5aea0662-7f9b-491b-aa9e-f95a5541dd5e",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "581a1b95-f931-4329-93f6-9966c3afa65f",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "879e617b-c974-4d2a-8404-4a29a88717cc",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "264ac7c3-4e0a-4e6b-8872-62404fb58f10",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "1865589d-96e9-4ad1-953e-c541900ca4a5",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "a5ae6463-2eb9-4916-b000-c0ac40dbf8d8",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "0ac4d584-914e-429b-8a15-f52e6888ae09",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "f60c28a1-7d4f-4066-bd4f-6d55546913fc",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "2587e3c4-98fe-46cc-b83b-f6ae0dd6b8a9",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "48f3aa67-a6c4-4d90-bb37-896022e45ef3",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "31aeb095-55a3-4e5c-b952-9e301fb2f6fb",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "6574ba37-63ec-476d-a1f4-91d0d1ed150a",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "ae87814b-1287-419d-9391-008690eb07dc",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "0b954329-ce8b-431d-a9f2-5139f41d1937",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "1121718a-8bf2-41d2-a6e1-70a126a4fbb3",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "11276291-5130-4caf-be45-6838a3984aed",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "b380d4b8-8e20-4d3f-9457-f408a8e6afe2",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "b2f8fc1a-2408-4bd9-9cd2-258388680ed6",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "default-wildcard",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "type": "wildcard",
+          "uiType": "default-wildcard"
+        }
+      ],
+      "steps": [
+        {
+          "type": "passthrough"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    }
+  ]
+}
