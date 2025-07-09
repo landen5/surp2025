@@ -60,18 +60,29 @@ def find_data_occurrences(har_file_path, search_terms, filter_methods=None):
                 if response_content and term in str(response_content): add_finding(term, "Response Body", response_content, "Response Body")
     return all_findings
 
-def generate_rules_file(findings_to_export, action_choice, filename):
+def generate_rules_file(findings_to_export, action_choice, filename, transform_map=None):
     METHOD_MAP = { 'GET': 0, 'POST': 1, 'PUT': 2, 'DELETE': 3, 'PATCH': 4, 'HEAD': 5, 'OPTIONS': 6 }
-    action_step = {}
-    if action_choice == '1': action_step = { "type": "close-connection" }
-    elif action_choice == '2': action_step = { "type": "simple", "status": 403, "statusMessage": "Forbidden", "headers": {}, "data": "Blocked by generated privacy rule." }
-    elif action_choice == '3': action_step = { "type": "passthrough", "uiType": "request-breakpoint" }
     rules = []
     for finding in findings_to_export:
         matchers = []
         if finding['method'] in METHOD_MAP:
             matchers.append({ "method": METHOD_MAP[finding['method']], "type": "method", "uiType": finding['method'] })
         matchers.append({ "type": "simple-path", "path": finding['url'] })
+        action_step = {}
+        if action_choice == '1':
+            action_step = { "type": "close-connection" }
+        elif action_choice == '2':
+            action_step = { "type": "simple", "status": 403, "statusMessage": "Forbidden", "headers": {}, "data": "Blocked by generated privacy rule." }
+        elif action_choice == '3':
+            action_step = { "type": "passthrough", "uiType": "request-breakpoint" }
+        elif action_choice == '4' and transform_map:
+            original_value = finding['search_term']
+            new_value = transform_map.get(original_value, original_value)
+            action_step = {
+                "uiType": "req-res-transformer",
+                "transformRequest": { "matchReplaceBody": [[{"source": original_value, "flags": "g"}, new_value]] },
+                "transformResponse": {}
+            }
         rule = { "id": str(uuid.uuid4()), "type": "http", "activated": True, "matchers": matchers, "steps": [action_step], "completionChecker": { "type": "always" } }
         rules.append(rule)
     default_pass_through_rule = { "id": "default-wildcard", "type": "http", "activated": True, "matchers": [{"type": "wildcard", "uiType": "default-wildcard"}], "steps": [{"type": "passthrough"}], "completionChecker": {"type": "always"} }
@@ -104,12 +115,22 @@ def interactive_session(findings):
                     except ValueError: print("Invalid input. Please enter numbers separated by commas or 'all'."); continue
                 if not findings_to_export: print("No valid findings selected."); continue
                 print(f"\nGenerating rules for {len(findings_to_export)} finding(s).")
-                print("\nWhat kind of rule do you want to create?\n  [1] Close connection immediately (Hard block)\n  [2] Return a 403 Forbidden error (Informative block)\n  [3] Pause the request for manual editing (Debug/Modify)")
-                action_choice = input("Choose an action [1/2/3]: ");
-                if action_choice not in ['1', '2', '3']: print("Invalid action choice."); continue
+                print("\nWhat kind of rule do you want to create?\n  [1] Close connection immediately (Hard block)\n  [2] Return a 403 Forbidden error (Informative block)\n  [3] Pause the request for manual editing (Debug)\n  [4] Automatically transform data (Find/Replace)")
+                action_choice = input("Choose an action [1/2/3/4]: ")
+                transform_map = None
+                if action_choice == '4':
+                    transform_map = {}
+                    print("\nEnter the new values for each identifier:")
+                    # Get unique search terms from the selected findings to avoid asking for the same replacement twice
+                    unique_terms_to_transform = sorted(list(set(f['search_term'] for f in findings_to_export)))
+                    for term in unique_terms_to_transform:
+                        new_value = input(f"  Replace '{term}' with: ")
+                        transform_map[term] = new_value
+                elif action_choice not in ['1', '2', '3']:
+                    print("Invalid action choice."); continue
                 filename = input("Enter a filename for the rules (default: httptoolkit-rules.json): ");
                 if not filename: filename = "httptoolkit-rules.json"
-                generate_rules_file(findings_to_export, action_choice, filename)
+                generate_rules_file(findings_to_export, action_choice, filename, transform_map)
             else:
                 index = int(choice) - 1
                 if 0 <= index < len(findings):
@@ -121,7 +142,7 @@ def interactive_session(findings):
         except (ValueError, IndexError): print("Invalid input. Please enter a number from the list, 'g', or 'q'.")
         except KeyboardInterrupt: print("\nExiting."); break
 
-# --- MAIN FUNCTION: UPDATED with --device ---
+# --- MAIN FUNCTION: Corrected ---
 def main():
     parser = argparse.ArgumentParser(
         description="Interactively analyze a HAR file for specific data and generate HTTP Toolkit rules.",
@@ -131,7 +152,6 @@ def main():
     parser.add_argument(
         "--data", nargs='*', help="One-off specific data to search for (e.g., an email)."
     )
-    # <<-- CHANGE IS HERE -->>
     parser.add_argument(
         '--device', help="Path to a text file containing device-specific IDs (one per line)."
     )
@@ -139,10 +159,7 @@ def main():
         "--method", nargs='+', help="Filter results for specific HTTP methods (e.g., POST GET)."
     )
     args = parser.parse_args()
-
-    # Build the final list of terms to search for
     search_terms = []
-    # <<-- AND HERE -->>
     if args.device:
         try:
             with open(args.device, 'r') as f:
@@ -152,18 +169,17 @@ def main():
                         search_terms.append(clean_line)
         except FileNotFoundError:
             parser.error(f"The specified device ID file was not found: {args.device}")
-    
     if args.data:
         search_terms.extend(args.data)
-
     if not search_terms:
         parser.error("No data to search for. You must use --data or --device.")
-
+    
     final_search_terms = sorted(list(set(search_terms)))
+    
+    # <<< THIS IS THE CORRECTED LINE >>>
     print(f"[*] Analyzing '{args.har_file}' for {len(final_search_terms)} specific term(s)...\n")
     
     all_findings = find_data_occurrences(args.har_file, final_search_terms, args.method)
-
     if all_findings is not None:
         interactive_session(all_findings)
 

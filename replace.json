@@ -1,0 +1,61 @@
+{
+  "id": "generated-privacy-rules",
+  "title": "Generated Privacy Blocklist",
+  "items": [
+    {
+      "id": "41868f44-e084-42dc-8031-85081b5d7e9c",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "gmail.com",
+                  "flags": "g"
+                },
+                "outlook.com"
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "default-wildcard",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "type": "wildcard",
+          "uiType": "default-wildcard"
+        }
+      ],
+      "steps": [
+        {
+          "type": "passthrough"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    }
+  ]
+}
