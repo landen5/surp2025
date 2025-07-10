@@ -5,7 +5,7 @@
         "label": "Launch Android Emulator",
         "type": "shell",
         "command": "/Users/landen/Library/Android/sdk/emulator/emulator",
-        "args": ["-avd", "Pixel_6a"],
+        "args": ["-avd", "Pixel_6_Pro"],
         "presentation": {
           "reveal": "always", 
           "panel": "new"

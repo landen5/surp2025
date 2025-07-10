@@ -1,0 +1,97 @@
+{
+  "id": "generated-privacy-rules",
+  "title": "Generated Privacy Blocklist",
+  "items": [
+    {
+      "id": "7e128644-890d-46e1-93c4-9ca0c0e5ad91",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api2.amplitude.com/"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "7ebb9fcd-8440-49f8-8225-a76b6ff4a084",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api2.amplitude.com/"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "f7ebc35d-8c30-4123-8fd1-0ab659af832e",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api2.amplitude.com/"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "default-wildcard",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "type": "wildcard",
+          "uiType": "default-wildcard"
+        }
+      ],
+      "steps": [
+        {
+          "type": "passthrough"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    }
+  ]
+}
