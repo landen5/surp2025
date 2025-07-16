@@ -1,0 +1,53 @@
+{
+  "id": "generated-privacy-rules",
+  "title": "Generated Privacy Blocklist",
+  "items": [
+    {
+      "id": "6f431b6d-cf50-4f55-84f1-fe4a85b86639",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 2,
+          "type": "method",
+          "uiType": "PUT"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.smartsheet.com/2.0/internal/me/settings?accessApiLevel=1"
+        },
+        {
+          "type": "raw-body-includes",
+          "content": "John"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "default-wildcard",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "type": "wildcard",
+          "uiType": "default-wildcard"
+        }
+      ],
+      "steps": [
+        {
+          "type": "passthrough"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    }
+  ]
+}

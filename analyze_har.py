@@ -1,12 +1,13 @@
 import json
 import argparse
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import urlparse
+from collections import Counter # A highly efficient tool for counting
 import ast
 import uuid
 
-# All helper functions (generate_context_snippet, etc.) are unchanged.
-
+# --- All previous helper functions remain the same ---
 def generate_context_snippet(content, term, location_type):
+    # (Unchanged)
     if location_type not in ["Request Body", "Response Body"]: return content
     parsed_data = None
     if isinstance(content, (dict, list)): parsed_data = content
@@ -30,6 +31,7 @@ def generate_context_snippet(content, term, location_type):
     return str(content)
 
 def find_data_occurrences(har_file_path, search_terms, filter_methods=None):
+    # (Unchanged)
     try:
         with open(har_file_path, 'r', encoding='utf-8') as f: har_data = json.load(f)
     except Exception as e: print(f"Error reading or parsing HAR file: {e}"); return None
@@ -60,56 +62,28 @@ def find_data_occurrences(har_file_path, search_terms, filter_methods=None):
                 if response_content and term in str(response_content): add_finding(term, "Response Body", response_content, "Response Body")
     return all_findings
 
-# --- UPDATED FUNCTION WITH CORRECTED LOGIC ---
 def generate_rules_file(findings_to_export, action_choice, filename, transform_map=None):
+    # (Unchanged)
     METHOD_MAP = { 'GET': 0, 'POST': 1, 'PUT': 2, 'DELETE': 3, 'PATCH': 4, 'HEAD': 5, 'OPTIONS': 6 }
     rules = []
     for finding in findings_to_export:
-        # --- MATCHER BUILDING LOGIC IS NOW UNIFIED ---
         matchers = []
         if finding['method'] in METHOD_MAP:
             matchers.append({ "method": METHOD_MAP[finding['method']], "type": "method", "uiType": finding['method'] })
-        
         matchers.append({ "type": "simple-path", "path": finding['url'] })
-
-        # This now applies to ALL rules if the data was found in the body
         if finding['location'] == 'Request Body':
-            matchers.append({
-                "type": "raw-body-includes",
-                "content": finding['search_term']
-            })
-        
-        # --- ACTION BUILDING LOGIC IS SEPARATE ---
+            matchers.append({"type": "raw-body-includes", "content": finding['search_term']})
         action_step = {}
-        if action_choice == '1':
-            action_step = { "type": "close-connection" }
-        elif action_choice == '2':
-            action_step = { "type": "simple", "status": 403, "statusMessage": "Forbidden", "headers": {}, "data": "Blocked by generated privacy rule." }
-        elif action_choice == '3':
-            action_step = { "type": "passthrough", "uiType": "request-breakpoint" }
+        if action_choice == '1': action_step = { "type": "close-connection" }
+        elif action_choice == '2': action_step = { "type": "simple", "status": 403, "statusMessage": "Forbidden", "headers": {}, "data": "Blocked by generated privacy rule." }
+        elif action_choice == '3': action_step = { "type": "passthrough", "uiType": "request-breakpoint" }
         elif action_choice == '4' and transform_map:
-            original_value = finding['search_term']
-            new_value = transform_map.get(original_value, original_value)
-            action_step = {
-                "uiType": "req-res-transformer",
-                "transformRequest": { "matchReplaceBody": [[{"source": original_value, "flags": "g"}, new_value]] },
-                "transformResponse": {}
-            }
-            
-        rule = {
-            "id": str(uuid.uuid4()),
-            "type": "http",
-            "activated": True,
-            "matchers": matchers, # Use the fully constructed matcher list
-            "steps": [action_step],
-            "completionChecker": { "type": "always" }
-        }
+            original_value = finding['search_term']; new_value = transform_map.get(original_value, original_value)
+            action_step = { "uiType": "req-res-transformer", "transformRequest": { "matchReplaceBody": [[{"source": original_value, "flags": "g"}, new_value]] }, "transformResponse": {} }
+        rule = { "id": str(uuid.uuid4()), "type": "http", "activated": True, "matchers": matchers, "steps": [action_step], "completionChecker": { "type": "always" } }
         rules.append(rule)
-        
-    # Add the default pass-through rule at the very end
     default_pass_through_rule = { "id": "default-wildcard", "type": "http", "activated": True, "matchers": [{"type": "wildcard", "uiType": "default-wildcard"}], "steps": [{"type": "passthrough"}], "completionChecker": {"type": "always"} }
     rules.append(default_pass_through_rule)
-    
     final_json = { "id": "generated-privacy-rules", "title": "Generated Privacy Blocklist", "items": rules }
     try:
         with open(filename, 'w') as f: json.dump(final_json, f, indent=2)
@@ -118,6 +92,7 @@ def generate_rules_file(findings_to_export, action_choice, filename, transform_m
     except Exception as e: print(f"\n❌ Error writing to file: {e}")
 
 def interactive_session(findings):
+    # (Unchanged)
     if not findings: print("[-] No occurrences matching your criteria were found."); return
     print(f"[+] Found {len(findings)} total matching occurrence(s).")
     while True:
@@ -142,14 +117,11 @@ def interactive_session(findings):
                 action_choice = input("Choose an action [1/2/3/4]: ")
                 transform_map = None
                 if action_choice == '4':
-                    transform_map = {}
-                    print("\nEnter the new values for each identifier:")
+                    transform_map = {}; print("\nEnter the new values for each identifier:")
                     unique_terms_to_transform = sorted(list(set(f['search_term'] for f in findings_to_export)))
                     for term in unique_terms_to_transform:
-                        new_value = input(f"  Replace '{term}' with: ")
-                        transform_map[term] = new_value
-                elif action_choice not in ['1', '2', '3']:
-                    print("Invalid action choice."); continue
+                        new_value = input(f"  Replace '{term}' with: "); transform_map[term] = new_value
+                elif action_choice not in ['1', '2', '3']: print("Invalid action choice."); continue
                 filename = input("Enter a filename for the rules (default: httptoolkit-rules.json): ");
                 if not filename: filename = "httptoolkit-rules.json"
                 generate_rules_file(findings_to_export, action_choice, filename, transform_map)
@@ -164,6 +136,48 @@ def interactive_session(findings):
         except (ValueError, IndexError): print("Invalid input. Please enter a number from the list, 'g', or 'q'.")
         except KeyboardInterrupt: print("\nExiting."); break
 
+# --- NEW FUNCTION TO REPLICATE JQ COMMAND ---
+def summarize_hosts(har_file_path):
+    """Counts and prints a sorted summary of all hosts contacted in a HAR file."""
+    try:
+        with open(har_file_path, 'r', encoding='utf-8') as f:
+            har_data = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: The file '{har_file_path}' was not found.")
+        return
+    except json.JSONDecodeError:
+        print(f"Error: Could not decode JSON from '{har_file_path}'. Is it a valid HAR file?")
+        return
+
+    all_hosts = []
+    for entry in har_data.get('log', {}).get('entries', []):
+        # Prefer getting the host from the URL for consistency
+        url = entry.get('request', {}).get('url')
+        if url:
+            try:
+                hostname = urlparse(url).hostname
+                if hostname:
+                    all_hosts.append(hostname)
+            except Exception:
+                continue # Skip malformed URLs
+    
+    if not all_hosts:
+        print("No hosts found in the HAR file.")
+        return
+
+    # Use collections.Counter to efficiently count host occurrences
+    host_counts = Counter(all_hosts)
+    
+    # most_common() sorts by count in descending order automatically
+    sorted_hosts = host_counts.most_common()
+
+    # Format the output strings
+    output_lines = [f"{count} {host}" for host, count in sorted_hosts]
+
+    # Print the final result, joined as a single line
+    print(", ".join(output_lines))
+
+# --- MAIN FUNCTION: UPDATED to handle --summarize-hosts ---
 def main():
     parser = argparse.ArgumentParser(
         description="Interactively analyze a HAR file for specific data and generate HTTP Toolkit rules.",
@@ -179,23 +193,35 @@ def main():
     parser.add_argument(
         "--method", nargs='+', help="Filter results for specific HTTP methods (e.g., POST GET)."
     )
+    parser.add_argument(
+        '--summarize-hosts', action='store_true',
+        help="Print a count of all hosts contacted, sorted by frequency, then exit."
+    )
     args = parser.parse_args()
+
+    # --- NEW LOGIC: If summarize flag is used, run that function and exit ---
+    if args.summarize_hosts:
+        summarize_hosts(args.har_file)
+        return
+
+    # --- The rest of the script runs only if --summarize-hosts is NOT used ---
     search_terms = []
     if args.device:
         try:
             with open(args.device, 'r') as f:
                 for line in f:
-                    clean_line = line.strip()
-                    if clean_line:
-                        search_terms.append(clean_line)
+                    clean_line = line.strip();
+                    if clean_line: search_terms.append(clean_line)
         except FileNotFoundError:
             parser.error(f"The specified device ID file was not found: {args.device}")
     if args.data:
         search_terms.extend(args.data)
     if not search_terms:
-        parser.error("No data to search for. You must use --data or --device.")
+        parser.error("No data to search for. You must use --data or --device (or --summarize-hosts).")
+    
     final_search_terms = sorted(list(set(search_terms)))
     print(f"[*] Analyzing '{args.har_file}' for {len(final_search_terms)} specific term(s)...\n")
+    
     all_findings = find_data_occurrences(args.har_file, final_search_terms, args.method)
     if all_findings is not None:
         interactive_session(all_findings)
