@@ -1,0 +1,97 @@
+{
+  "id": "generated-privacy-rules",
+  "title": "Generated Privacy Blocklist",
+  "items": [
+    {
+      "id": "86bd7369-fd79-4015-9d8a-9c436ff5ae8b",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "8319990865",
+                  "flags": "g"
+                },
+                "4085678905"
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "80770a16-f5e6-44ee-b702-da3b437f6b1a",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "8319990865",
+                  "flags": "g"
+                },
+                "4085678905"
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "default-wildcard",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "type": "wildcard",
+          "uiType": "default-wildcard"
+        }
+      ],
+      "steps": [
+        {
+          "type": "passthrough"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    }
+  ]
+}

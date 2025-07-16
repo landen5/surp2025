@@ -4,28 +4,11 @@ from urllib.parse import urlparse, urlunparse
 import ast
 import uuid
 
-ESSENTIAL_HOST_SUFFIXES = {
-    # Google Play & Core Android Services - Truly essential for app functionality
-    'play-fe.googleapis.com',
-    'android.googleapis.com',
-    'connectivitycheck.gstatic.com',
-    'google.com/generate_204',
-    'ssl.gstatic.com', # Often used for critical static resources
+# All helper functions (generate_context_snippet, etc.) are unchanged.
 
-    # Firebase Infrastructure (excluding the ones I want to test)
-    'firebaseinstallations.googleapis.com',
-    'firebaseremoteconfig.googleapis.com',
-    
-    # Other potential core infrastructure
-    'mtalk.google.com' # Older Google Talk Service used for notifications
-}
-
-
-# --- All other functions remain the same ---
 def generate_context_snippet(content, term, location_type):
-    # (Unchanged)
     if location_type not in ["Request Body", "Response Body"]: return content
-    parsed_data = None;
+    parsed_data = None
     if isinstance(content, (dict, list)): parsed_data = content
     elif isinstance(content, str):
         try: parsed_data = json.loads(content)
@@ -47,7 +30,6 @@ def generate_context_snippet(content, term, location_type):
     return str(content)
 
 def find_data_occurrences(har_file_path, search_terms, filter_methods=None):
-    # (Unchanged)
     try:
         with open(har_file_path, 'r', encoding='utf-8') as f: har_data = json.load(f)
     except Exception as e: print(f"Error reading or parsing HAR file: {e}"); return None
@@ -78,15 +60,26 @@ def find_data_occurrences(har_file_path, search_terms, filter_methods=None):
                 if response_content and term in str(response_content): add_finding(term, "Response Body", response_content, "Response Body")
     return all_findings
 
+# --- UPDATED FUNCTION WITH CORRECTED LOGIC ---
 def generate_rules_file(findings_to_export, action_choice, filename, transform_map=None):
-    # (Unchanged)
     METHOD_MAP = { 'GET': 0, 'POST': 1, 'PUT': 2, 'DELETE': 3, 'PATCH': 4, 'HEAD': 5, 'OPTIONS': 6 }
-    rules = [];
+    rules = []
     for finding in findings_to_export:
-        matchers = [];
+        # --- MATCHER BUILDING LOGIC IS NOW UNIFIED ---
+        matchers = []
         if finding['method'] in METHOD_MAP:
             matchers.append({ "method": METHOD_MAP[finding['method']], "type": "method", "uiType": finding['method'] })
+        
         matchers.append({ "type": "simple-path", "path": finding['url'] })
+
+        # This now applies to ALL rules if the data was found in the body
+        if finding['location'] == 'Request Body':
+            matchers.append({
+                "type": "raw-body-includes",
+                "content": finding['search_term']
+            })
+        
+        # --- ACTION BUILDING LOGIC IS SEPARATE ---
         action_step = {}
         if action_choice == '1':
             action_step = { "type": "close-connection" }
@@ -95,13 +88,28 @@ def generate_rules_file(findings_to_export, action_choice, filename, transform_m
         elif action_choice == '3':
             action_step = { "type": "passthrough", "uiType": "request-breakpoint" }
         elif action_choice == '4' and transform_map:
-            original_value = finding['search_term'];
+            original_value = finding['search_term']
             new_value = transform_map.get(original_value, original_value)
-            action_step = { "uiType": "req-res-transformer", "transformRequest": { "matchReplaceBody": [[{"source": original_value, "flags": "g"}, new_value]] }, "transformResponse": {} }
-        rule = { "id": str(uuid.uuid4()), "type": "http", "activated": True, "matchers": matchers, "steps": [action_step], "completionChecker": { "type": "always" } }
+            action_step = {
+                "uiType": "req-res-transformer",
+                "transformRequest": { "matchReplaceBody": [[{"source": original_value, "flags": "g"}, new_value]] },
+                "transformResponse": {}
+            }
+            
+        rule = {
+            "id": str(uuid.uuid4()),
+            "type": "http",
+            "activated": True,
+            "matchers": matchers, # Use the fully constructed matcher list
+            "steps": [action_step],
+            "completionChecker": { "type": "always" }
+        }
         rules.append(rule)
+        
+    # Add the default pass-through rule at the very end
     default_pass_through_rule = { "id": "default-wildcard", "type": "http", "activated": True, "matchers": [{"type": "wildcard", "uiType": "default-wildcard"}], "steps": [{"type": "passthrough"}], "completionChecker": {"type": "always"} }
     rules.append(default_pass_through_rule)
+    
     final_json = { "id": "generated-privacy-rules", "title": "Generated Privacy Blocklist", "items": rules }
     try:
         with open(filename, 'w') as f: json.dump(final_json, f, indent=2)
@@ -110,7 +118,6 @@ def generate_rules_file(findings_to_export, action_choice, filename, transform_m
     except Exception as e: print(f"\n❌ Error writing to file: {e}")
 
 def interactive_session(findings):
-    # (Unchanged)
     if not findings: print("[-] No occurrences matching your criteria were found."); return
     print(f"[+] Found {len(findings)} total matching occurrence(s).")
     while True:
@@ -123,43 +130,21 @@ def interactive_session(findings):
             if choice.lower() == 'q': break
             elif choice.lower() == 'g':
                 nums_to_export_str = input("Enter numbers to export (e.g., 1, 3, 4), or type 'all' for every finding: ")
-                selected_findings = []
-                if nums_to_export_str.lower().strip() == 'all': selected_findings = findings
+                findings_to_export = []
+                if nums_to_export_str.lower().strip() == 'all': findings_to_export = findings
                 else:
                     try:
-                        indices_to_export = [int(n.strip()) - 1 for n in nums_to_export_str.split(',')]; selected_findings = [findings[i] for i in indices_to_export if 0 <= i < len(findings)]
+                        indices_to_export = [int(n.strip()) - 1 for n in nums_to_export_str.split(',')]; findings_to_export = [findings[i] for i in indices_to_export if 0 <= i < len(findings)]
                     except ValueError: print("Invalid input. Please enter numbers separated by commas or 'all'."); continue
-                if not selected_findings: print("No valid findings selected."); continue
-                
-                safe_findings_to_export = []
-                skipped_hosts = set()
-                for finding in selected_findings:
-                    is_essential = False
-                    for essential_suffix in ESSENTIAL_HOST_SUFFIXES:
-                        if finding['hostname'] and finding['hostname'].endswith(essential_suffix):
-                            is_essential = True
-                            skipped_hosts.add(finding['hostname'])
-                            break
-                    if not is_essential:
-                        safe_findings_to_export.append(finding)
-                
-                if skipped_hosts:
-                    print("\n[*] NOTE: Skipping rule generation for essential system hosts:")
-                    for host in sorted(list(skipped_hosts)):
-                        print(f"    - {host}")
-                
-                if not safe_findings_to_export:
-                    print("\n[-] All selected findings were on essential hosts. No rules will be generated.")
-                    continue
-                
-                print(f"\nGenerating rules for {len(safe_findings_to_export)} non-essential finding(s).")
+                if not findings_to_export: print("No valid findings selected."); continue
+                print(f"\nGenerating rules for {len(findings_to_export)} finding(s).")
                 print("\nWhat kind of rule do you want to create?\n  [1] Close connection (Hard block)\n  [2] Return 403 Forbidden\n  [3] Pause for manual editing\n  [4] Automatically transform data")
-                action_choice = input("Choose an action [1/2/3/4]: ");
+                action_choice = input("Choose an action [1/2/3/4]: ")
                 transform_map = None
                 if action_choice == '4':
                     transform_map = {}
                     print("\nEnter the new values for each identifier:")
-                    unique_terms_to_transform = sorted(list(set(f['search_term'] for f in safe_findings_to_export)))
+                    unique_terms_to_transform = sorted(list(set(f['search_term'] for f in findings_to_export)))
                     for term in unique_terms_to_transform:
                         new_value = input(f"  Replace '{term}' with: ")
                         transform_map[term] = new_value
@@ -167,7 +152,7 @@ def interactive_session(findings):
                     print("Invalid action choice."); continue
                 filename = input("Enter a filename for the rules (default: httptoolkit-rules.json): ");
                 if not filename: filename = "httptoolkit-rules.json"
-                generate_rules_file(safe_findings_to_export, action_choice, filename, transform_map)
+                generate_rules_file(findings_to_export, action_choice, filename, transform_map)
             else:
                 index = int(choice) - 1
                 if 0 <= index < len(findings):
@@ -180,12 +165,20 @@ def interactive_session(findings):
         except KeyboardInterrupt: print("\nExiting."); break
 
 def main():
-    # (Unchanged)
-    parser = argparse.ArgumentParser( description="Interactively analyze a HAR file for specific data and generate HTTP Toolkit rules.", formatter_class=argparse.RawTextHelpFormatter)
+    parser = argparse.ArgumentParser(
+        description="Interactively analyze a HAR file for specific data and generate HTTP Toolkit rules.",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
     parser.add_argument("har_file", help="Path to the .har file to analyze.")
-    parser.add_argument( "--data", nargs='*', help="One-off specific data to search for (e.g., an email).")
-    parser.add_argument( '--device', help="Path to a text file containing device-specific IDs (one per line).")
-    parser.add_argument( "--method", nargs='+', help="Filter results for specific HTTP methods (e.g., POST GET).")
+    parser.add_argument(
+        "--data", nargs='*', help="One-off specific data to search for (e.g., an email)."
+    )
+    parser.add_argument(
+        '--device', help="Path to a text file containing device-specific IDs (one per line)."
+    )
+    parser.add_argument(
+        "--method", nargs='+', help="Filter results for specific HTTP methods (e.g., POST GET)."
+    )
     args = parser.parse_args()
     search_terms = []
     if args.device:
@@ -193,14 +186,19 @@ def main():
             with open(args.device, 'r') as f:
                 for line in f:
                     clean_line = line.strip()
-                    if clean_line: search_terms.append(clean_line)
-        except FileNotFoundError: parser.error(f"The specified device ID file was not found: {args.device}")
-    if args.data: search_terms.extend(args.data)
-    if not search_terms: parser.error("No data to search for. You must use --data or --device.")
+                    if clean_line:
+                        search_terms.append(clean_line)
+        except FileNotFoundError:
+            parser.error(f"The specified device ID file was not found: {args.device}")
+    if args.data:
+        search_terms.extend(args.data)
+    if not search_terms:
+        parser.error("No data to search for. You must use --data or --device.")
     final_search_terms = sorted(list(set(search_terms)))
     print(f"[*] Analyzing '{args.har_file}' for {len(final_search_terms)} specific term(s)...\n")
     all_findings = find_data_occurrences(args.har_file, final_search_terms, args.method)
-    if all_findings is not None: interactive_session(all_findings)
+    if all_findings is not None:
+        interactive_session(all_findings)
 
 if __name__ == "__main__":
     main()

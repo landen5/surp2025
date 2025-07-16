@@ -1,0 +1,781 @@
+{
+  "id": "generated-privacy-rules",
+  "title": "Generated Privacy Blocklist",
+  "items": [
+    {
+      "id": "822e04e7-5b55-44b5-80d7-8e43dc009a98",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.com/identity-HttpsGetAllowedProvidersV1?email=ppslab47+aaa@gmail.com"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "75b2b80a-06ec-4a96-82c2-f2d1315014e6",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "b77f00b6-9d11-46f3-9561-47942724d890",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.com/signup-code"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "4f51023c-1a27-49c9-8524-48c8f74be6fe",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.com/signup"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "873099b4-49ae-4fbb-bc03-25f10ee9cac1",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyD1opk6gxinvAefwxD3T8X9aFeq2O7JpH0"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "adbe2e20-1ed8-47cc-8da5-f71327718a2f",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "03323b39-f965-4229-ab01-dc993173f78e",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "d8674dc7-8a42-4e4e-8f81-1fe4dc68d968",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "ff0aa17f-e14c-415e-b3dc-60e6f994b7d0",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "754b3b42-88bf-4ec7-90cb-702df39e148f",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/server2-HttpsGetAccountsV1"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "67ab104b-db1c-4a9a-8b41-e99561f1755e",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "380612c7-2377-428f-ae66-9a8454427321",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/server2-HttpsGetAccountsV1"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "3a63c7dd-e5af-4249-a24b-5e47dd672a77",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "12ea277f-95f3-45ae-8811-809b53a4c295",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "258a58e2-1e61-4588-ae11-6c158e20a9f8",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "2153882f-ad8c-4bc2-8865-d31263797417",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/server2-HttpsGetAccountsV1"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "c35dba4e-5554-45a8-9779-ae311bfcc00d",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "914aa937-6d3b-45e7-b92e-c4fbe9bb51fa",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "de20f0b8-7068-4dd1-b64e-e29a923571bd",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "618b96f2-9a6d-45c4-a776-dba99966c5bb",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "db29f14a-3505-4126-8337-8178f90ccda4",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://api.hihello.me/graph-Graph"
+        }
+      ],
+      "steps": [
+        {
+          "uiType": "req-res-transformer",
+          "transformRequest": {
+            "matchReplaceBody": [
+              [
+                {
+                  "source": "ppslab47+aaa@gmail.com",
+                  "flags": "g"
+                },
+                ""
+              ]
+            ]
+          },
+          "transformResponse": {}
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "default-wildcard",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "type": "wildcard",
+          "uiType": "default-wildcard"
+        }
+      ],
+      "steps": [
+        {
+          "type": "passthrough"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    }
+  ]
+}

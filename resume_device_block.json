@@ -1,0 +1,257 @@
+{
+  "id": "generated-privacy-rules",
+  "title": "Generated Privacy Blocklist",
+  "items": [
+    {
+      "id": "4f1d7ff0-1a5c-4381-9180-1c9cadb14d1d",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://kfg2xg.register.appsflyersdk.com/api/v6.17/androidevent?app_id=com.mobisystems.office&buildnumber=6.17.0"
+        },
+        {
+          "type": "raw-body-includes",
+          "content": "59cbbf6f-d388-4a69-b02b-9d3bb30dcfd0"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "f740987e-3ef6-413e-b381-247700365a42",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://graph.facebook.com/v16.0/1555496338031504/activities"
+        },
+        {
+          "type": "raw-body-includes",
+          "content": "59cbbf6f-d388-4a69-b02b-9d3bb30dcfd0"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "6ff0f4f6-8cb5-4e09-a0e3-d85f7cf6f4ea",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://graph.facebook.com/v16.0/1555496338031504/activities"
+        },
+        {
+          "type": "raw-body-includes",
+          "content": "59cbbf6f-d388-4a69-b02b-9d3bb30dcfd0"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "65efcf69-6c06-4c2b-86ab-6ba28c38ae4a",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://graph.facebook.com/v16.0/1555496338031504/activities"
+        },
+        {
+          "type": "raw-body-includes",
+          "content": "59cbbf6f-d388-4a69-b02b-9d3bb30dcfd0"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "94eb7b38-08ee-4e48-9a0f-688372a36f1e",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://privacy-sandbox.appsflyersdk.com/api/trigger?event_name=install&app_id=com.mobisystems.office&app_version=15.5.56413&sdk_version=6.17.0&api_version=35&timestamp=1752614000519&request_id=7bac4044-379e-4c97-966e-df18aa251284&gaid=59cbbf6f-d388-4a69-b02b-9d3bb30dcfd0&appsflyer_id=1752613989130-1639270601236066501&install_time=1752613188924"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "3d515782-907f-4b27-8e4d-9a7127e3db59",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://privacy-sandbox.appsflyersdk.com/api/trigger?event_name=af_sandbox_revenue&app_id=com.mobisystems.office&app_version=15.5.56413&sdk_version=6.17.0&api_version=35&timestamp=1752614077298&request_id=5ad74b1c-1c7b-4f91-a8d2-9e5e611c0145&gaid=59cbbf6f-d388-4a69-b02b-9d3bb30dcfd0&appsflyer_id=1752613989130-1639270601236066501&install_time=1752613188924"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "6ed21484-37f6-4e33-a4e5-120ae4d6d10b",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://privacy-sandbox.appsflyersdk.com/api/trigger?event_name=af_sandbox_revenue&app_id=com.mobisystems.office&app_version=15.5.56413&sdk_version=6.17.0&api_version=35&timestamp=1752614133048&request_id=3e8a435a-42f6-499e-b6a0-f7ae82b6a025&gaid=59cbbf6f-d388-4a69-b02b-9d3bb30dcfd0&appsflyer_id=1752613989130-1639270601236066501&install_time=1752613188924"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "167210bd-4a8c-4b70-bbc0-9cc7bde1954a",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://privacy-sandbox.appsflyersdk.com/api/trigger?event_name=af_sandbox_revenue&app_id=com.mobisystems.office&app_version=15.5.56413&sdk_version=6.17.0&api_version=35&timestamp=1752614202796&request_id=c215d720-1e21-466e-b300-bd1625045755&gaid=59cbbf6f-d388-4a69-b02b-9d3bb30dcfd0&appsflyer_id=1752613989130-1639270601236066501&install_time=1752613188924"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "8c9aa2e7-9ca0-4282-bcd5-734138e88b44",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://privacy-sandbox.appsflyersdk.com/api/trigger?event_name=af_sandbox_revenue&app_id=com.mobisystems.office&app_version=15.5.56413&sdk_version=6.17.0&api_version=35&timestamp=1752614246111&request_id=0ab923c1-20dc-4ec6-adc0-a80cfd8c29fd&gaid=59cbbf6f-d388-4a69-b02b-9d3bb30dcfd0&appsflyer_id=1752613989130-1639270601236066501&install_time=1752613188924"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "default-wildcard",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "type": "wildcard",
+          "uiType": "default-wildcard"
+        }
+      ],
+      "steps": [
+        {
+          "type": "passthrough"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    }
+  ]
+}
