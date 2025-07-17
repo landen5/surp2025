@@ -1,0 +1,317 @@
+{
+  "id": "generated-privacy-rules",
+  "title": "Generated Privacy Blocklist",
+  "items": [
+    {
+      "id": "418b44a7-18d9-470d-b553-f33ae5ca4850",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://event.tradplusad.com/api/v1_2/ev"
+        },
+        {
+          "type": "raw-body-includes",
+          "content": "uuid"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "33b093c6-7318-406d-b034-21b4945b0e20",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 1,
+          "type": "method",
+          "uiType": "POST"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://member-center.kdanmobile.com/api/v5/member/verification/third_party?app_version=PR_AND_3.44.2"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "f05be5aa-a3dc-49da-8061-24f64b7543e1",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 2,
+          "type": "method",
+          "uiType": "PUT"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://member-center.kdanmobile.com/api/v5/member_info/modify?app_version=PR_AND_3.44.2"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "c2ab438c-ae2e-4d49-acc0-91ae4ec72281",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://member-center.kdanmobile.com/api/v4/member_info/private?app_version=PR_AND_3.44.2"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "4ece8e6f-de5a-457d-9361-6168cacc5065",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://member-center.kdanmobile.com/api/v5/member_info/private?app_version=PR_AND_3.44.2"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "f0aa46bf-eddb-44a6-a342-012040f4bce3",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://tpc.googlesyndication.com/pagead/js/r20250715/r20110914/client/one_afma_ctd.js"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "4ee0fced-365e-4ca4-ac45-ed02930e5dca",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://pagead2.googlesyndication.com/omsdk/releases/live/omid_session_bin.js"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "07c5e16f-1a83-44b8-9b88-6cb58517f703",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://www.googletagservices.com/activeview/js/current/lidar.js?cache=r20110914"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "9955b5c3-1f2f-4724-8654-27881adf80ec",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://tpc.googlesyndication.com/pagead/js/r20250716/r20110914/client/one_afma_ctd.js"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "883f79dd-f41e-414e-9e4d-f1928df89192",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://tpc.googlesyndication.com/pagead/js/r20250715/r20110914/client/one_afma_ctd_fy2021.js"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "a2c84755-3008-4a0e-af89-a0eeadd0b6db",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://www.gstatic.com/mysidia/273301d5401ec19c9d3cbce040c8c1b3.js?tag=video_ctd/interstitial_cruella_v5"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "4dd17a43-0eb1-4c18-9fa6-90584ebbe261",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "method": 0,
+          "type": "method",
+          "uiType": "GET"
+        },
+        {
+          "type": "simple-path",
+          "path": "https://www.gstatic.com/mysidia/032cffdc1ca386d88942305785b2dd59.js?tag=addon/video"
+        }
+      ],
+      "steps": [
+        {
+          "type": "close-connection"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    },
+    {
+      "id": "default-wildcard",
+      "type": "http",
+      "activated": true,
+      "matchers": [
+        {
+          "type": "wildcard",
+          "uiType": "default-wildcard"
+        }
+      ],
+      "steps": [
+        {
+          "type": "passthrough"
+        }
+      ],
+      "completionChecker": {
+        "type": "always"
+      }
+    }
+  ]
+}

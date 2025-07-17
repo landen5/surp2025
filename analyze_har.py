@@ -1,14 +1,20 @@
 import json
 import argparse
-from urllib.parse import urlparse
-from collections import Counter # A highly efficient tool for counting
+from urllib.parse import urlparse, urlunparse
 import ast
 import uuid
 
-# --- All previous helper functions remain the same ---
+# --- NEW: ANSI color codes for highlighting in the terminal ---
+class BColors:
+    HIGHLIGHT = '\033[93m' # Bright Yellow text
+    RESET = '\033[0m'     # Reset to default color
+
+# --- UPDATED to use color highlighting ---
 def generate_context_snippet(content, term, location_type):
-    # (Unchanged)
-    if location_type not in ["Request Body", "Response Body"]: return content
+    if location_type not in ["Request Body", "Response Body"]:
+        # For simple strings like URLs or headers, highlight directly
+        return content.replace(term, f"{BColors.HIGHLIGHT}{term}{BColors.RESET}")
+
     parsed_data = None
     if isinstance(content, (dict, list)): parsed_data = content
     elif isinstance(content, str):
@@ -16,19 +22,32 @@ def generate_context_snippet(content, term, location_type):
         except json.JSONDecodeError:
             try: parsed_data = ast.literal_eval(content)
             except (ValueError, SyntaxError, MemoryError, TypeError): parsed_data = None
+    
     if parsed_data:
         try: pretty_content = json.dumps(parsed_data, indent=2); lines = pretty_content.split('\n')
         except TypeError: lines = str(parsed_data).split('\n')
     else: lines = str(content).split('\n')
+    
     snippet_lines = []; line_num_with_term = -1
     for i, line in enumerate(lines):
         if term in line: line_num_with_term = i; break
+            
     if line_num_with_term != -1:
         start = max(0, line_num_with_term - 2); end = min(len(lines), line_num_with_term + 3)
         for i in range(start, end):
-            prefix = "  > " if i == line_num_with_term else "    "; snippet_lines.append(f"{prefix}{lines[i]}")
+            current_line = lines[i]
+            if i == line_num_with_term:
+                # Highlight the term on the line where it was found
+                highlighted_line = current_line.replace(term, f"{BColors.HIGHLIGHT}{term}{BColors.RESET}")
+                prefix = "  > "
+                snippet_lines.append(f"{prefix}{highlighted_line}")
+            else:
+                prefix = "    "
+                snippet_lines.append(f"{prefix}{current_line}")
         return "\n".join(snippet_lines)
-    return str(content)
+    
+    # Fallback for when the term is not found in the split lines (rare)
+    return str(content).replace(term, f"{BColors.HIGHLIGHT}{term}{BColors.RESET}")
 
 def find_data_occurrences(har_file_path, search_terms, filter_methods=None):
     # (Unchanged)
@@ -98,7 +117,7 @@ def interactive_session(findings):
     while True:
         print("\n" + "---" * 15)
         for i, find in enumerate(findings):
-            url_display = (find['url'][:75] + '...') if len(find['url']) > 75 else find['url']; print(f"  [{i+1}] {find['method']} to {find['hostname']} - Found '{find['search_term']}' in {find['location']}")
+            url_display = (find['url'][:75] + '...') if len(find['url']) > 75 else find['url']; print(f"  [{i+1}] {find['method']} to {find['hostname']} - Found '{BColors.HIGHLIGHT}{find['search_term']}{BColors.RESET}' in {find['location']}")
         print("---" * 15)
         try:
             choice = input(f"Enter a number to see details, 'g' to generate rules, or 'q' to quit: ")
@@ -130,81 +149,26 @@ def interactive_session(findings):
                 if 0 <= index < len(findings):
                     selected = findings[index]
                     print("\n" + "="*20 + f" Details for Finding #{index+1} " + "="*20)
-                    print(f"Method:   {selected['method']}\nHost:     {selected['hostname']}\nFull URL: {selected['url']}\nFound:    '{selected['search_term']}'\nLocation: {selected['location']}")
+                    print(f"Method:   {selected['method']}\nHost:     {selected['hostname']}\nFull URL: {selected['url']}")
+                    # Also highlight the 'Found' line for consistency
+                    print(f"Found:    '{BColors.HIGHLIGHT}{selected['search_term']}{BColors.RESET}'")
+                    print(f"Location: {selected['location']}")
                     print("-" * 15 + " Context Snippet " + "-"*15); print(selected['context_snippet']); print("="*59)
                 else: print("Invalid number. Please try again.")
         except (ValueError, IndexError): print("Invalid input. Please enter a number from the list, 'g', or 'q'.")
         except KeyboardInterrupt: print("\nExiting."); break
 
-# --- NEW FUNCTION TO REPLICATE JQ COMMAND ---
-def summarize_hosts(har_file_path):
-    """Counts and prints a sorted summary of all hosts contacted in a HAR file."""
-    try:
-        with open(har_file_path, 'r', encoding='utf-8') as f:
-            har_data = json.load(f)
-    except FileNotFoundError:
-        print(f"Error: The file '{har_file_path}' was not found.")
-        return
-    except json.JSONDecodeError:
-        print(f"Error: Could not decode JSON from '{har_file_path}'. Is it a valid HAR file?")
-        return
-
-    all_hosts = []
-    for entry in har_data.get('log', {}).get('entries', []):
-        # Prefer getting the host from the URL for consistency
-        url = entry.get('request', {}).get('url')
-        if url:
-            try:
-                hostname = urlparse(url).hostname
-                if hostname:
-                    all_hosts.append(hostname)
-            except Exception:
-                continue # Skip malformed URLs
-    
-    if not all_hosts:
-        print("No hosts found in the HAR file.")
-        return
-
-    # Use collections.Counter to efficiently count host occurrences
-    host_counts = Counter(all_hosts)
-    
-    # most_common() sorts by count in descending order automatically
-    sorted_hosts = host_counts.most_common()
-
-    # Format the output strings
-    output_lines = [f"{count} {host}" for host, count in sorted_hosts]
-
-    # Print the final result, joined as a single line
-    print(", ".join(output_lines))
-
-# --- MAIN FUNCTION: UPDATED to handle --summarize-hosts ---
 def main():
+    # (Unchanged)
     parser = argparse.ArgumentParser(
         description="Interactively analyze a HAR file for specific data and generate HTTP Toolkit rules.",
         formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument("har_file", help="Path to the .har file to analyze.")
-    parser.add_argument(
-        "--data", nargs='*', help="One-off specific data to search for (e.g., an email)."
-    )
-    parser.add_argument(
-        '--device', help="Path to a text file containing device-specific IDs (one per line)."
-    )
-    parser.add_argument(
-        "--method", nargs='+', help="Filter results for specific HTTP methods (e.g., POST GET)."
-    )
-    parser.add_argument(
-        '--summarize-hosts', action='store_true',
-        help="Print a count of all hosts contacted, sorted by frequency, then exit."
-    )
+    parser.add_argument("--data", nargs='*', help="One-off specific data to search for (e.g., an email).")
+    parser.add_argument('--device', help="Path to a text file containing device-specific IDs (one per line).")
+    parser.add_argument("--method", nargs='+', help="Filter results for specific HTTP methods (e.g., POST GET).")
     args = parser.parse_args()
-
-    # --- NEW LOGIC: If summarize flag is used, run that function and exit ---
-    if args.summarize_hosts:
-        summarize_hosts(args.har_file)
-        return
-
-    # --- The rest of the script runs only if --summarize-hosts is NOT used ---
     search_terms = []
     if args.device:
         try:
@@ -212,19 +176,13 @@ def main():
                 for line in f:
                     clean_line = line.strip();
                     if clean_line: search_terms.append(clean_line)
-        except FileNotFoundError:
-            parser.error(f"The specified device ID file was not found: {args.device}")
-    if args.data:
-        search_terms.extend(args.data)
-    if not search_terms:
-        parser.error("No data to search for. You must use --data or --device (or --summarize-hosts).")
-    
+        except FileNotFoundError: parser.error(f"The specified device ID file was not found: {args.device}")
+    if args.data: search_terms.extend(args.data)
+    if not search_terms: parser.error("No data to search for. You must use --data or --device.")
     final_search_terms = sorted(list(set(search_terms)))
     print(f"[*] Analyzing '{args.har_file}' for {len(final_search_terms)} specific term(s)...\n")
-    
     all_findings = find_data_occurrences(args.har_file, final_search_terms, args.method)
-    if all_findings is not None:
-        interactive_session(all_findings)
+    if all_findings is not None: interactive_session(all_findings)
 
 if __name__ == "__main__":
     main()
